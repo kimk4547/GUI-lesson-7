@@ -43,7 +43,32 @@ def tie():
 def get_computer_choice():
     return random.choice(options)
 
+def get_player_choice(player_input):
+    global player_score, computer_score
+    computer_input = get_computer_choice()
+    cc_label.config(text = "Computer Selected : " + computer_input[0])
+    pc_label.config(text = "Player Selected : " + player_input[0])
 
+    if player_input == computer_input:
+        tie()
+
+    if(player_input[1] == 0):
+        if(computer_input[1] == 1):
+            computer_wins()
+        elif(computer_input[1] == 2):
+            player_wins()
+
+    if(player_input[1] == 1):
+        if(computer_input[1] == 2):
+            computer_wins()
+        elif(computer_input[1] == 0):
+            player_wins()
+
+    if(player_input[1] == 2):
+        if(computer_input[1] == 0):
+            computer_wins()
+        elif(computer_input[1] == 1):
+            player_wins()
 
 title_label = Label(text = 'Rock Paper Scissors', font = font.Font(size = 20), fg = 'grey')
 
@@ -61,15 +86,15 @@ po_label = Label(frame, text = 'player options', font = app_font, fg = 'grey')
 
 po_label.grid(row = 0, column = 0, pady = 8)
 
-rock_btn = Button(frame, text = "Rock", width = 15, bd = 0, bg = 'pink', pady = 5)
+rock_btn = Button(frame, text = "Rock", width = 15, bd = 0, bg = 'pink', pady = 5, command = lambda : get_player_choice(options[0]))
 
 rock_btn.grid(row = 1, column = 1, padx = 8, pady = 5)
 
-paper_btn = Button(frame, text = "Paper", width = 15, bd = 0, bg = 'green', pady = 5)
+paper_btn = Button(frame, text = "Paper", width = 15, bd = 0, bg = 'green', pady = 5, command = lambda : get_player_choice(options[1]))
 
 paper_btn.grid(row = 1, column = 2, padx = 8, pady = 5)
 
-scissors_btn = Button(frame, text = "Scissors", width = 15, bd = 0, bg = 'blue', pady = 5)
+scissors_btn = Button(frame, text = "Scissors", width = 15, bd = 0, bg = 'blue', pady = 5, command = lambda : get_player_choice(options[2]))
 
 scissors_btn.grid(row = 1, column = 3, padx = 8, pady = 5)
 
